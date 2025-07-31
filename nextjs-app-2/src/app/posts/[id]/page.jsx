@@ -1,20 +1,30 @@
-const getSinglePost = async(post_id) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${post_id}`);
+export const getSinglePost = async (postId) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
   const data = await res.json();
-  return data
+  return data;
 }
 
-const SinglePostDetails = async({params}) => {
-  const p = await params;
-  const singlePost = await getSinglePost(p.id);
-  console.log(singlePost);
+export async function generateMetadata({ params }) {
+  const { id } = params; 
+  const singlePost = await getSinglePost(id);
+
+  return {
+    title: singlePost.title,
+    description: singlePost.body
+  };
+}
+
+const SinglePost = async ({ params }) => {
+  const { id } = params; 
+  const singlePost = await getSinglePost(id);
+
   return (
-    <div>
-      <p> Single Post ID: <span className="text-xl font-bold text-red-500"> {p.id} </span> </p>
-      <p className="text-green-500 font-bold"> Title: {singlePost.title} </p>
+    <div className="text-center">
+      <h2 className="text-xl font-bold text-red-500"> Single Post No: {singlePost.id} </h2>
+      <h2> Single Post Title: {singlePost.title} </h2>
       <p> {singlePost.body} </p>
     </div>
   );
 };
 
-export default SinglePostDetails;
+export default SinglePost;

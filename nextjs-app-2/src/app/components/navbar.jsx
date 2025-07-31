@@ -6,6 +6,8 @@ const Navbar = () => {
       <nav>
         <ul className="flex justify-around">
           <li> <Link href='/'> Home </Link> </li>
+          <li> <Link href='/products'> Products </Link> </li>
+          <li> <Link href='/products/add'> Add Products </Link> </li>
           <li> <Link href='/posts'> Posts </Link> </li>
           <li> <Link href='/meals'> Meals </Link> </li>
         </ul>
